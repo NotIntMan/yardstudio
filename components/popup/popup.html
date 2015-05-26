@@ -1,0 +1,98 @@
+<polymer-element name="popup-menu">
+    <template>
+        <style>
+            @import url(popup.css);
+        </style>
+        <div class="popup {{stateClass}}" style="left:{{left}}px; top:{{top}}px;">
+            <content></content>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            stateClass:'',
+            top:0,
+            left:0,
+            x:0,
+            xChanged:function(oldV,newV) {
+                var self=this;
+                this.style.opacity=0;
+                setTimeout(function() {
+                    var _=window.innerWidth-(self.popup.offsetWidth+25*window.devicePixelRatio);
+                    if (newV>_)
+                        self.left=_;
+                    else
+                        self.left=newV;
+                    self.style.opacity=1;
+                },0);
+            },
+            y:0,
+            yChanged:function(oldV,newV) {
+                var self=this;
+                this.style.opacity=0;
+                setTimeout(function() {
+                    var _=window.innerHeight-(self.popup.offsetHeight+25*window.devicePixelRatio);
+                    if (newV>_)
+                        self.top=_;
+                    else
+                        self.top=newV;
+                    self.style.opacity=1;
+                },0);
+            },
+            ready:function() {
+                var self=this;
+                this.tabIndex=0;
+                this.style.outline='none';
+                this.popup=this.shadowRoot.querySelector('.popup');
+                this.onblur=function() {
+                    self.hide();
+                };
+            },
+            attributeChanged:function(name,oldV,newV) {
+                this[name]=newV;
+            },
+            //methods
+            get visible() {
+                return this.stateClass==='visible';
+            },
+            set visible(bool) {
+                this.stateClass=bool?'visible':'';
+                if (bool) this.focus();
+            },
+            show:function(x,y) {
+                this.visible=true;
+                this.x=x;
+                this.y=y;
+            },
+            hide:function() {
+                this.visible=false;
+                this.x=0;
+                this.y=0;
+            }
+        });
+    </script>
+</polymer-element>
+
+<polymer-element name="popup-menu-item">
+    <template>
+        <style>
+            @import url(../icono/icono.min.css);
+            @import url(popup.css);
+        </style>
+        <div class="item {{stateClass}}">
+            <div class="icon icono-{{icon}}"></div>
+            <div><content></content></div>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            icon:'',
+            stateClass:'',
+            ready:function() {
+                this.icon=this.getAttribute('icon');
+            },
+            attributeChanged:function(name,oldV,newV) {
+                this[name]=newV;
+            }
+        });
+    </script>
+</polymer-element>

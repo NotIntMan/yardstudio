@@ -1,0 +1,18 @@
+body {
+    x-background: #111113;
+    font-family: Arial;
+    height: 100%;
+    
+}
+
+.editor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.ace_editor {
+    height: calc(100% - 51px);
+}

@@ -1,0 +1,116 @@
+<polymer-element name="io-form-inputbox">
+    <template>
+        <template if="{{_isPrimitive}}">
+            <template if="{{!readonly}}">
+                <span>{{caption}}</span>
+                <input type="{{type}}" value="{{value}}"/>
+            </template>
+            <template if="{{readonly}}">
+                <span>{{caption}}</span>
+                <input type="{{type}}" value="{{value}}" readonly/>
+            </template>
+        </template>
+
+
+
+        <template if="{{type==='check'}}">
+            <input type="checkbox" checked="{{value}}"/>
+            <span>{{caption}}</span>
+        </template>
+        <template if="{{type==='radio'}}">
+            <form>
+                <template repeat="{{v,i in source}}">
+                    <div>
+                        <input type="radio" value="{{i}}" name="Radio" checked="{{i==value}}" on-click="{{_radioClick}}"/>
+                        <span>{{caption}}</span>
+                    </div>
+                </template>
+            </form>
+        </template>
+    </template>
+    <script>
+        Polymer({
+            _isPrimitive:true,
+            type:'text',
+            typeChanged:function(oldV,newV) {
+                this._isPrimitive=false;
+                switch(newV) {
+                    case 'radio':
+                        try {
+                            this.source=JSON.parse(this.getAttribute('source'));
+                        } catch(e) {
+                            this.source=[];
+                        }
+                    break;
+                    case 'text':
+                    case 'password':
+                    case 'date':
+                    case 'datetime':
+                    case 'datetime-local':
+                    case 'email':
+                    case 'number':
+                    case 'range':
+                    case 'search':
+                    case 'tel':
+                    case 'time':
+                    case 'url':
+                    case 'month':
+                    case 'week':
+                        this._isPrimitive=true;
+                    break;
+                }
+            },
+            caption:'',
+            value:null,
+            valueChanged:function(oldV,newV) {
+                this.setAttribute('value',newV);
+            },
+            readonly:false,
+            created:function() {
+                ['type','caption','value'].forEach(function(n) {
+                    this[n]=this.getAttribute(n);
+                }.bind(this));
+                this.readonly=this.getAttribute('readonly')!==null;
+            },
+            attributeChanged:function(name,oldV,newV) {
+                this[name]=newV;
+            },
+            _radioClick:function(event) {
+                this.value=parseInt(event.target.value);
+            }
+        });
+    </script>
+</polymer-element>
+<polymer-element name="io-form">
+    <template>
+        <template repeat="{{v in model}}">
+            <template if="{{!readonly}}">
+                <div><io-form-inputbox type="{{v.type}}" value="{{v._value}}" caption="{{v.caption}}"></io-form-inputbox></div>
+            </template>
+            <template if="{{readonly}}">
+                <div><io-form-inputbox type="{{v.type}}" value="{{v._value}}" caption="{{v.caption}}" readonly></io-form-inputbox></div>
+            </template>
+        </template>
+    </template>
+    <script>
+        Polymer({
+            model:[],
+            modelChanged:function(oldV,newV) {
+                var inputs=this.shadowRoot.querySelectorAll('io-form-inputbox');
+                model.forEach(function(e,i) {
+                    if (_value in e) return;
+                    e._value=e.value;
+                    e.__defineGetter__('value',function() {
+                        return e._value=inputs[i].value;
+                    });
+                    e.__defineSetter__('value',function(v) {
+                        e._value=v;
+                    });
+                })
+            },
+            attributeChanged:function(name,oldV,newV) {
+                this[name]=newV;
+            }
+        });
+    </script>
+</polymer-element>

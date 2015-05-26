@@ -1,0 +1,162 @@
+<link rel="import" href="../../bower_components/juicy-html/juicy-html.html">
+<polymer-element name="drag-gable">
+    <template>
+        <style>
+            @import url(draggable.css);
+            {{docStyle}}
+            {{_style}}
+        </style>
+        <div class="container">
+            <template repeat="{{elem,i in __data}}">
+                <div
+                    style="{{moveBy==='x'?'left':'top'}}:{{(elem.tmp?elem.tmpCoord:elem.coord)+'px'}}"
+                    on-mousedown="{{__dragOn}}"
+                    data-i="{{i}}">
+                    <template is="juicy-html" content="{{elem.inner}}"></template>
+                </div>
+            </template>
+        </div>
+    </template>
+    <script>
+        (function() {
+            var Elem=function(x) {
+                this.coord=x||0;
+                this.tmpCoord=0;
+                this.tmp=false;
+                this.inner='';
+            };
+
+            Polymer({
+                size:100,
+                sizeChanged:function(oldV,newV) {
+                    this.moveByChanged(this.moveBy,this.moveBy);
+                },
+                margin:0,
+                moveBy:'',
+                moveByChanged:function(oldV,newV) {
+                    if (newV==='x')
+                        this._style='.container > * {width: '+this.size+'px}';
+                    if (newV==='y')
+                        this._style='.container > * {height: '+this.size+'px}';
+                },
+                ready:function() {
+                    this.moveBy='x';
+                    this.container=this.shadowRoot.querySelector('.container');
+                    this.docStyle=this.querySelector('style').innerText;
+                    this.template=this.querySelector('div');
+                },
+                attributeChanged:function(name,oldV,newV) {
+                    this[name]=newV;
+                },
+                //private
+                __data:[],
+                _render:function() {
+                    this.__data=this._data.slice().sort(function(a,b) {
+                        return a.coord-b.coord;
+                    });
+                },
+                get length() {
+                    return (this.margin+this.size)*this._data.length+this.margin+this.offsetLeft;
+                },
+                _data:[],
+                _dataChanged:function(oldV,newV) {
+                    for (var i=0; i<this._data.length; i++)
+                        this._data[i].coord=(this.margin+this.size)*i+this.margin+this.offsetLeft;
+                },
+                _style:'',
+                __dragOn:function(e) {
+                    window.lalka=e.target;
+                    var target=e.target.closest('.container > *');
+                    var index=parseInt(target.getAttribute('data-i'));
+                    var entity=this.__data[index];
+                    entity.dragDetail={index:index};
+                    var dragOffHandler=this._dragOff.bind(this,entity,target),
+                        dragHandler=this._drag.bind(this,entity,target),
+                        dragRemoveHandler;
+                    document.addEventListener('mouseup',dragOffHandler);
+                    document.addEventListener('mouseup',dragRemoveHandler=function() {
+                        document.removeEventListener('mouseup',dragOffHandler);
+                        document.removeEventListener('mouseup',dragRemoveHandler);
+                        document.removeEventListener('mousemove',dragHandler);
+                    });
+                    document.addEventListener('mousemove',dragHandler);
+
+                    var event=new CustomEvent('elem-click',{
+                        detail:{
+                            data:entity,
+                            event:e,
+                            target:e.target
+                        }
+                    });
+                    this.dispatchEvent(event);
+
+                    this._dragOn(entity,target,e);
+                },
+                _dragOn:function(data,target,event) {
+                    target.classList.add('drag');
+                    data.dragDetail.begin=(
+                        this.moveBy==='x'?
+                        event.clientX:
+                        event.clientY
+                    )-data.coord;
+                },
+                _findPosByCoord:function(coord) {
+                    if (this._data.length<2) return 0;
+                    var coordSized=coord+(this.size/2);
+                    if (this._data[0].coord>coordSized) return 0;
+                    for (var i=0; i<this._data.length-1; i++) {
+                        if ((this._data[i].coord<(coordSized)) && (this._data[i+1].coord>(coordSized)))
+                            return i;
+                    }
+                    return this._data.length-1;
+                },
+                _swapPos:function(a,t) {
+                    if ((a<0)||(t<0))
+                        return;
+                    var step=1;
+                    if ((t-a)<0)
+                        step=-1;
+                    for (var i=a; (i*step)<(t*step); i+=step) {
+                        var c=this._data[i];
+                        this._data[i]=this._data[i+step];
+                        this._data[i+step]=c;
+                    }
+                },
+                _drag:function(data,target,event) {
+                    data.tmp=true;
+                    data.tmpCoord=(
+                        this.moveBy==='x'?
+                        event.clientX:
+                        event.clientY
+                    )-data.dragDetail.begin;
+                    var a=this._data.indexOf(data);
+                    var b=this._findPosByCoord(data.tmpCoord);
+                    if (a!==b)
+                        this._swapPos(a,b);
+                },
+                _dragOff:function(data,target,event) {
+                    target.classList.remove('drag');
+                    delete data.dragDetail;
+                    setTimeout(this._render.bind(this),1000);
+                    data.tmp=false;
+                },
+                //methods
+                add:function() {
+                    var data=new Elem();
+                    data.inner=this.template.innerHTML;
+                    this._data.push(data);
+                    this._render();
+                    return data;
+                },
+                remove:function(elem) {
+                    var pos;
+                    if ((pos=this._data.indexOf(elem))>=0) {
+                        this._data.splice(pos,1);
+                        this._render();
+                    };
+                    return pos;
+                }
+            });
+        })();
+    </script>
+</polymer-element>

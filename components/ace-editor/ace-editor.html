@@ -1,0 +1,154 @@
+<script src="ace-editor/ace.js"></script>
+<link rel="import" href="../popup/popup.html">
+<link rel="import" href="../draggable/draggable.html">
+<polymer-element name="ace-editor">
+    <template>
+        <style>@import url(../icono/icono.min.css);</style>
+        <style>@import url(ace-editor.css);</style>
+        <div class="tabs">
+            <drag-gable>
+                <style>
+                    .tab {
+                        height: 50px;
+                        padding: 5px;
+                        border-left: 5px solid #2F3129;
+                        background: #272822;
+                        box-sizing: border-box;
+                        font-size: 12px;
+                        color: white;
+                        transition: border-color 1s;
+                    }
+                    .tab.active {
+                        border-color: #40C2E8;
+                    }
+                    .tab span {
+                        display: block;
+                    }
+                    .tab .title {
+                        padding-right: 20px;
+                        word-wrap: break-word;
+                    }
+                    .tab .icono-cross {
+                        float: right;
+                        zoom: 0.5;
+                        cursor: pointer;
+                    }
+                    @import url(../icono/icono.min.css);
+                </style>
+                <div></div>
+            </drag-gable>
+            <span on-click="{{_newTab}}" style="margin-left:{{tabContainer.length}}px" class="icono-plus"></span>
+            <div class="editor"></div>
+        </div>
+        <content></content>
+    </template>
+    <script>
+        (function() {
+            var Tab=function(session,mode,title) {
+                if (typeof(session)==="string") {
+                    this.session=new ace.EditSession(session,mode);
+                    this.title=title||'Null title';
+                } else {
+                    this.session=session;
+                    this.title=mode||'Null title';
+                };
+            };
+            Tab.prototype.setMode=function(mode) {
+                this.session.setMode("ace/mode/"+mode.toString());
+                return this;
+            };
+            Polymer({
+                editor:null,
+                editorCurrentTab:null,
+                tabContainer:null,
+                ready:function() {
+                    var div=document.createElement('div');
+                    this.appendChild(div);
+                    var editor=this.editor=ace.edit(div);
+
+                    this._tabNode=this.shadowRoot.querySelector('.tabs');
+
+                    var tabC=this.tabContainer=this.shadowRoot.querySelector('drag-gable');
+                    tabC.size=200;
+                    tabC.addEventListener('elem-click',function(e) {
+                        if (e.detail.target.matches('.tab .icono-cross'))
+                            return this._closeTab(e.detail.data);
+                        this.selectTab(e.detail.data.tab);
+                    }.bind(this));
+
+                    this.setTheme("monokai");
+                    this.newTab(editor.getSession()).setMode("javascript").title='JavaScript';
+                    this.newTab('').setMode("css").title='CSS';
+                    this.newTab('').setMode("html").title='HTML';
+                    editor.$blockScrolling=Infinity;
+
+                    this._plus=this.shadowRoot.querySelector('.icono-plus');
+                },
+                attributeChanged:function(name,oldV,newV) {
+                    this[name]=newV;
+                },
+                _getShortTitle:function(tab) {
+                    var res=tab.title.slice(0,10);
+                    if (tab.title.length>res.length)
+                        res+='...';
+                    return res;
+                },
+                _newTab:function() {
+                    this.newTab("");
+                },
+                _closeTab:function(elem) {
+                    var pos,
+                        current=this.tabContainer._data.indexOf(elem);
+                    if ((pos=this.tabContainer.remove(elem))>=0) {
+                        this._resize();
+                        
+                        var l=this.tabContainer._data.length;
+                        if (l===0) return this._newTab();
+                        if (pos>=l)
+                            pos-=1;
+                        return this.selectTab(
+                            this.tabContainer._data[pos].tab
+                        );
+                    }
+                },
+                _resize:function() {
+                    var newSize=Math.floor((this._tabNode.offsetWidth-25)/(this.tabContainer._data.length+1));
+                    if (newSize<75)
+                        return alert('Not enough space for new tab.');
+                    else
+                        if (newSize>200)
+                            this.tabContainer.size=200;
+                        else
+                            this.tabContainer.size=newSize;
+                },
+                //methods
+                newTab:function(session,mode,title) {
+                    this._resize();
+
+                    var tab=new Tab(session,mode,title);
+                    var _tab=this.tabContainer.add();
+                    _tab.tab=tab;
+                    _tab.inner=`<div class="tab {{elem.tab.active?'active':''}}">
+                        <span class="icono-cross"></span>
+                        <span class="title">{{elem.tab.title}}</span>
+                    </div>`;
+                    this.selectTab(tab);
+                    var self=this;
+                    return tab;
+                },
+                selectTab:function(tab) {
+                    for (var i of this.tabContainer._data)
+                        i.tab.active=false;
+                    tab.active=true;
+                    this.editor.setSession(tab.session);
+                },
+                closeTab:function(tab) {
+
+                },
+                setTheme:function(theme) {
+                    this.editor.setTheme("ace/theme/"+theme.toString());
+                }
+            });
+        })();
+    </script>
+</polymer-element>

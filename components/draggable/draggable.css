@@ -1,0 +1,13 @@
+.container {
+    -webkit-user-select: none;
+}
+
+.container > * {
+    position: absolute;
+    transition: 0.5s;
+}
+
+.container > *.drag {
+    transition: none;
+    z-index: 999;
+}

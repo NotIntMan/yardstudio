@@ -1,0 +1,40 @@
+.popup {
+    background: white;
+    box-shadow: 0 0 3px black;
+    -webkit-user-select: none;
+    cursor: default;
+    display: none;
+    position: fixed;
+    z-index: 9999;
+}
+
+.popup.visible {
+    display: inline-block;
+}
+
+.item {
+    font-size: 15px;
+    padding: 5px 15px;
+    margin: 5px 0;
+    cursor: pointer;
+    vertical-align: center;
+    transition: 1s;
+}
+
+.item:hover {
+    background: rgba(0,0,0,0.125);
+}
+
+.item .icon {
+    zoom: 0.75;
+    transition: 1s;
+    color: rgba(0,0,0,0.125);
+}
+
+.item:hover .icon {
+    color: black;
+}
+
+.item > div {
+    display: inline-block;
+}
