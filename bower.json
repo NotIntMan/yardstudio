@@ -1,0 +1,30 @@
+{
+  "name": "yardstudio",
+  "main": "index.html",
+  "version": "0.1.3",
+  "homepage": "https://github.com/NIM-Pro/yardstudio",
+  "authors": [
+    "Dmitry Dyomin <shepardiwe@gmail.com>"
+  ],
+  "description": "Yet Another Rapid Development Studio",
+  "keywords": [
+    "node",
+    "webkit",
+    "nw",
+    "js",
+    "build",
+    "ide"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "core-component-page": "Polymer/core-component-page#^0.5.0",
+    "juicy-html": "Juicy/juicy-html#~0.0.20141119",
+    "platform": "Polymer/platform#^0.4.0"
+  }
+}

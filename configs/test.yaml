@@ -1,0 +1,13 @@
+main:
+    type: map
+    AppName:
+        type: const
+        value: YARDStudio
+    AppVersion:
+        value: 0.1.3
+addons:
+    type: map
+    toolbar:
+        type: pushable array
+        data:
+            
