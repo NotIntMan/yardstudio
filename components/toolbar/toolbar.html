@@ -1,11 +1,78 @@
+<link rel="import" href="../../lib/config-manager.html">
+<link rel="import" href="../../lib/keymaster.html">
 <polymer-element name="tool-bar">
     <template>
         <style>@import url(toolbar.css);</style>
-        <div class="toolbar">
+        <div class="toolbar {{visible?'visible':''}}">
             
         </div>
     </template>
     <script>
-        Polymer({})
+        (function() {
+            var Tool=function(title,hotkey,action) {
+                this.title=title||'';
+                this.hotkey=hotkey||'';
+                this.action=action||null;
+            };
+            var LoadToolBar=function(name,object) {
+                var configPromise=Config.load('toolbars/'+name+'.yml')
+                .catch(function() {
+                    return {
+                        title:'',
+                        tools:{},
+                        hotkeys:{},
+                        actionfile:''
+                    };
+                });
+                var statePromise=Config.reload('toolbars/'+name+'-state.yml')
+                .catch(function() {
+                    return [];
+                });
+                Promise.all([configPromise,statePromise])
+                .then(function(data) {
+                    var config=data[0];
+                    var state=data[1];
+                    var actions={};
+                    if (config.data.actionfile)
+                        actions=require('./toolbars/'+config.data.actionfile);
+                    var hotkeys=config.data.hotkeys;
+                    for (var scope in hotkeys) {
+                        for (var name in hotkeys[scope]) {
+                            if (actions[name])
+                                window.KeyRegister(hotkeys[scope][name],scope,actions[name]);
+                        };
+                    };
+                });
+            };
+
+            Polymer({
+                toolbar:'main',
+                visible:false,
+                visibleChanged:function(oldV,newV) {
+                    if ((!this._loaded)&&newV)
+                        this.visible=false;
+                },
+                tools:{},
+                mainTools:[],
+                mainToolsChanged:function(oldV,newV) {
+                    clearTimeout(this._stateUpdatePointer);
+                    var data=this.mainTools;
+                    this._stateUpdatePointer=setTimeout(function() {
+                        console.log('State save');
+                    },1000);
+                },
+                //private
+                _stateUpdatePointer:null,
+                _loaded:false,
+                ready:function() {
+                    this.toolbar=this.getAttribute('toolbar')||'main';
+
+                    LoadToolBar(this.toolbar,this);
+                },
+                attributeChanged:function(name,oldV,newV) {
+                    this[name]=newV;
+                }
+            });
+        })();
     </script>
 </polymer-element>

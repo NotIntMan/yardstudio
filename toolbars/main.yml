@@ -1,0 +1,9 @@
+actionfile: main.js
+hotkeys:
+    editor:
+        nextTab: command+tab, ctrl+tab
+        prevTab: command+shift+tab, ctrl+shift+tab
+tools:
+    editor:
+        nextTab: Next tab
+        prevTab: Prev tab

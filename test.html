@@ -3,23 +3,22 @@
 <head>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="index.css"/>
-    <script type="application/javascript" src="lib/config-manager.js"></script>
-    <script type="application/javascript" src="lib/js-yaml.min.js"></script>
     <script type="application/javascript" src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <script type="application/javascript" src="lib/application.js"></script>
     <link rel="import" href="bower_components/polymer/polymer.html">
     <link rel="import" href="components/toolbar/toolbar.html">
     <title>YARDStudio</title>
 </head>
 <body>
     <style>
-        drag-gable {
-            margin-left: 50px;
+        tool-bar {
+            
         }
     </style>
-    
+    <tool-bar tool-bar="main"></tool-bar>
     <script>
         window.addEventListener('polymer-ready', function(e) {
-            
+            window.tb=document.querySelector('tool-bar');
         });
     </script>
 </body>
