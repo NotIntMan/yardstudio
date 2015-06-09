@@ -6,19 +6,20 @@
     <script type="application/javascript" src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <script type="application/javascript" src="lib/application.js"></script>
     <link rel="import" href="bower_components/polymer/polymer.html">
-    <link rel="import" href="components/toolbar/toolbar.html">
+    <link rel="import" href="lib/keymaster.html">
+    <link rel="import" href="components/filetree/filetree.html">
     <title>YARDStudio</title>
 </head>
 <body>
     <style>
-        tool-bar {
+        file-tree {
             
         }
     </style>
-    <tool-bar tool-bar="main"></tool-bar>
+    <file-tree></file-tree>
     <script>
         window.addEventListener('polymer-ready', function(e) {
-            window.tb=document.querySelector('tool-bar');
+            console.log('Polymer loaded');
         });
     </script>
 </body>

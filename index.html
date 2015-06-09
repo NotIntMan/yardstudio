@@ -4,13 +4,22 @@
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="index.css"/>
     <script type="application/javascript" src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <script type="application/javascript" src="lib/application.js"></script>
     <link rel="import" href="bower_components/polymer/polymer.html">
     <link rel="import" href="components/ace-editor/ace-editor.html">
+    <link rel="import" href="components/toolbar/toolbar.html">
+    <link rel="import" href="components/dialog/dialog.html">
     <title>YARDStudio</title>
 </head>
 <body>
-    <div class="editor">
-        <ace-editor></ace-editor>
+    <div class="center-col">
+        <div class="toolbar">
+            <tool-bar tool-bar="main"></tool-bar>
+        </div>
+        <div class="editor">
+            <ace-editor></ace-editor>
+        </div>
+        <dialog-layer></dialog-layer>
     </div>
 </body>
 </html>

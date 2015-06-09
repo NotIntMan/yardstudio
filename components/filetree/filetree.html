@@ -1,0 +1,101 @@
+<polymer-element name="file-tree">
+    <template>
+        <style>@import url(filetree.css);</style>
+        <template id="dir">
+            <div class="dir" on-click="{{obj.toggleVisible}}">
+                <template repeat="{{file in obj.files}}">
+                    <div class="file">
+                        <div>{{(file.name||file)}}</div>
+                        <template if="{{!!file.files}}">
+                            <template bind="{{ {obj:file} }}" ref="dir"></template>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template bind="{{ {obj:root} }}" ref="dir"></template>
+    </template>
+    <script>
+        (function() {
+            var fs=require('fs');
+            var Path=require('path');
+            var PromiseMixin=require('yards-cli').yards.API.PromiseMixin;
+            var _readdir=PromiseMixin.denodeify(fs.readdir);
+            var _stat=PromiseMixin.denodeify(fs.stat);
+
+            var compareStrings=function(a,b) {
+                if (a>b)
+                    return 1;
+                else
+                    return 0;
+            };
+
+            var Dir=function(path,files) {
+                this.path=path;
+                this.name=Path.relative(Path.resolve(path,'..'),path);
+                this.files=files.slice().sort(function(a,b) {
+                    if (Dir.isDir(a)&&Dir.isDir(b))
+                        return compareStrings(a.name,b.name);
+                    if (Dir.isDir(a)) return 0;
+                    if (Dir.isDir(b)) return 1;
+                    return compareStrings(a,b);
+                });
+                this.visible=true;
+
+                var self=this;
+                this.toggleVisible=function() {
+                    console.log('azaza');
+                    self.visible=!self.visible;
+                };
+            };
+            Dir.isDir=function(x) {
+                return (x instanceof Dir);
+            };
+
+            var readDir;
+            readDir=function(path) {
+                return _readdir(path)
+                .then(function(files) {
+                    var proms=files.map(function(_filename) {
+                        var filename=Path.resolve(path,_filename);
+                        return _stat(filename)
+                        .then(function(stat) {
+                            if (stat.isFile())
+                                return _filename;
+                            if (stat.isDirectory())
+                                return readDir(filename);
+                        });
+                    });
+                    return Promise.all(proms)
+                    .then(function(files) {
+                        return new Dir(path,files);
+                    });
+                });
+            };
+
+            Polymer({
+                directoryPath:'',
+                root:null,
+                directoryPathChanged:function(oldV,newV) {
+                    var self=this;
+                    return readDir(newV)
+                    .then(function(dir) {
+                        return self.root=dir;
+                    });
+                },
+                ready:function() {
+                    
+                },
+                attributeChanged:function(name,oldV,newV) {
+                    this[name]=newV;
+                },
+                bindFunction: function(object) {
+                    console.log(object);
+                },
+                _dirClick:function(dir) {
+                    console.log(dir);
+                }
+            });
+        })();
+    </script>
+</polymer-element>

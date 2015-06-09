@@ -1,3 +1,80 @@
 .toolbar {
-    
+    display: none;
+    background: #202020;
+    -webkit-user-select: none;
+}
+
+.toolbar.visible {
+    display: block;
+}
+
+.toolbar .parts {
+    border-bottom: 1px solid #fff;
+}
+
+.toolbar .parts .part {
+    border-left: 5px solid #2F3129;
+    background: #272822;
+    color: white;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: default;
+    transition: 1s;
+}
+
+.toolbar .parts .part:hover {
+    color: #40C2E8;
+}
+
+.toolbar .parts .part.active {
+    border-color: #40C2E8;
+}
+
+.toolbar .tools {
+    height: 80px;
+}
+
+.toolbar .tools .tool {
+    display: inline-block;
+    color: white;
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.toolbar .tools .tool.mainTool {
+    box-shadow: 0 0 1px white;
+}
+
+.toolbar .tools .tool:hover {
+    background: #2F3129;
+}
+
+.toolbar .tools .tool:active {
+    border-color: #40C2E8;
+}
+
+.toolbar .tools .tool:active span {
+    color: #40C2E8;
+}
+
+.toolbar .tools .tool span {
+    display: block;
+    transition: 0.25s;
+}
+
+.toolbar .tools .tool .icon {
+    margin: 10px auto;
+    height: 20px;
+}
+
+.toolbar .tools .tool .title {
+    height: 10px;
+    font-size: 10px;
 }

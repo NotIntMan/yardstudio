@@ -2,33 +2,59 @@
 <link rel="import" href="../../lib/keymaster.html">
 <polymer-element name="tool-bar">
     <template>
-        <style>@import url(toolbar.css);</style>
+        <style>@import url(toolbar.css);@import url(../icono/icono.min.css);</style>
         <div class="toolbar {{visible?'visible':''}}">
-            
+            <div class="parts">
+                <div
+                class="part {{_currentToolArray===mainTools?'active':''}}"
+                on-click="{{_selectPart}}"
+                >Primary</div><!--
+                --><template repeat="{{part in _parts}}"><!--
+                    --><div
+                    class="part {{_currentToolArray===(tools[part.name].data)?'active':''}}"
+                    on-click="{{_selectPart}}"
+                    data-partname="{{part.name}}"
+                    >{{part.title}}</div><!--
+                --></template>
+            </div>
+            <div class="tools">
+                <template repeat="{{tool,i in _currentToolArray}}"><!--
+                    --><div
+                    on-click="{{_toolClick}}"
+                    data-i="{{i}}"
+                    class="tool {{tool.mainTool?'mainTool':''}}">
+                        <span class="icon icono-{{tool.icon}}"></span>
+                        <span class="title">{{tool.title}}</span>
+                    </div><!--
+                --></template>
+            </div>
         </div>
     </template>
     <script>
         (function() {
-            var Tool=function(title,hotkey,action) {
+            var Tool=function(title,icon,action) {
                 this.title=title||'';
-                this.hotkey=hotkey||'';
+                this.icon=icon;
                 this.action=action||null;
+                this.iconIsImage=false;
+                this.mainTool=false;
+                this.name='';
             };
             var LoadToolBar=function(name,object) {
                 var configPromise=Config.load('toolbars/'+name+'.yml')
                 .catch(function() {
-                    return {
+                    return new Config({
                         title:'',
                         tools:{},
                         hotkeys:{},
                         actionfile:''
-                    };
+                    });
                 });
                 var statePromise=Config.reload('toolbars/'+name+'-state.yml')
                 .catch(function() {
-                    return [];
+                    return new Config([]);
                 });
-                Promise.all([configPromise,statePromise])
+                return Promise.all([configPromise,statePromise])
                 .then(function(data) {
                     var config=data[0];
                     var state=data[1];
@@ -40,6 +66,28 @@
                         for (var name in hotkeys[scope]) {
                             if (actions[name])
                                 window.KeyRegister(hotkeys[scope][name],scope,actions[name]);
+                        };
+                    };
+                    var tools=config.data.tools;
+                    for (var part in tools) {
+                        object.tools[part]={
+                            title:tools[part].title,
+                            data:[]
+                        };
+                        for (var name in tools[part]) {
+                            if (name!=='title') {
+                                var toolObj=tools[part][name];
+                                var toolName=part+'.'+name;
+                                var tool=new Tool(toolObj.title, toolObj.icon, actions[name]);
+                                tool.name=toolName;
+                                object.tools[part].data.push(tool);
+                                try {
+                                    if (state.data.indexOf(toolName)>=0) {
+                                        object.mainTools.push(tool);
+                                        tool.mainTool=true;
+                                    }
+                                } catch(e) {};
+                            };
                         };
                     };
                 });
@@ -55,22 +103,83 @@
                 tools:{},
                 mainTools:[],
                 mainToolsChanged:function(oldV,newV) {
+                    if (!this._loaded) return;
                     clearTimeout(this._stateUpdatePointer);
                     var data=this.mainTools;
+                    var filename='toolbars/'+this.toolbar+'-state.yml';
                     this._stateUpdatePointer=setTimeout(function() {
-                        console.log('State save');
+                        var d=data.map(function(t) {
+                            return t.name;
+                        });
+                        var c=new Config(d,filename);
+                        c.save().then(function() {
+                            console.log('State saved');
+                        },function(e) {
+                            console.log(e.stack||e);
+                        })
                     },1000);
                 },
                 //private
+                _parts:[],
                 _stateUpdatePointer:null,
                 _loaded:false,
+                _currentToolArray:null,
                 ready:function() {
                     this.toolbar=this.getAttribute('toolbar')||'main';
 
-                    LoadToolBar(this.toolbar,this);
+                    LoadToolBar(this.toolbar,this).then(function() {
+                        this.selectPart();
+                        this._loaded=true;
+                        this.visible=true;
+                        this.render();
+                    }.bind(this));
                 },
                 attributeChanged:function(name,oldV,newV) {
                     this[name]=newV;
+                },
+                _selectPart:function(e) {
+                    var name=e.target.getAttribute('data-partname');
+                    if (name===null)
+                        this.selectPart();
+                    else
+                        this.selectPart(name);
+                },
+                _toolClick:function(e) {
+                    var index=e.target.closest('.tools .tool').getAttribute('data-i');
+                    if (index===null) return App.editor.editor.focus();
+                    var tool=this._currentToolArray[index];
+                    if (!tool) return App.editor.editor.focus();
+                    switch(e.which) {
+                        case 1:
+                            var action=tool.action;
+                            if (action!==null)
+                                action.call(window,window.App);
+                        break;
+                        case 2:
+                            var pos=this.mainTools.indexOf(tool);
+                            if (pos>=0) {
+                                this.mainTools.splice(pos,1);
+                                tool.mainTool=false;
+                            } else {
+                                this.mainTools.push(tool);
+                                tool.mainTool=true;
+                            };
+                        break;
+                    };
+                    App.editor.editor.focus();
+                },
+                //methods
+                render:function() {
+                    var self=this;
+                    this._parts=Object.keys(this.tools).map(function(name){
+                        return {name:name,title:self.tools[name].title};
+                    });
+                },
+                selectPart:function(name) {
+                    if ((arguments.length===0)||(!(name in this.tools)))
+                        this._currentToolArray=this.mainTools;
+                    else
+                        this._currentToolArray=this.tools[name].data;
                 }
             });
         })();

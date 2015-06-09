@@ -1,9 +1,38 @@
 actionfile: main.js
 hotkeys:
     editor:
-        nextTab: command+tab, ctrl+tab
-        prevTab: command+shift+tab, ctrl+shift+tab
+        nextTab: ctrl+tab
+        prevTab: ctrl+shift+tab
+        newTab: ctrl+n
+        closeTab: ctrl+w
+        saveFile: ctrl+s
+        saveFileAs: ctrl+shift+s
+        openFile: ctrl+o
+        undo: ctrl+z
+        redo: ctrl+y
 tools:
-    editor:
-        nextTab: Next tab
-        prevTab: Prev tab
+    file:
+        title: File
+        newTab:
+            title: New
+            icon: file
+        openFile:
+            title: Open
+            icon: caretUp
+        saveFile:
+            title: Save
+            icon: caretDown
+        saveFileAs:
+            title: Save as...
+            icon: caretDown
+    mode:
+        title: Edit mode
+        setJS:
+            title: JavaScript
+            icon: codepen
+        setCSS:
+            title: CSS
+            icon: indent
+        setHTML:
+            title: HTML
+            icon: textAlignLeft

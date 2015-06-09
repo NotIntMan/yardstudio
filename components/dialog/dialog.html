@@ -1,0 +1,141 @@
+<polymer-element name="dialog-layer">
+    <template>
+        <style>@import url(dialog.css);</style>
+        <div class="overlayer {{messages.length>0?'visible':''}}">
+            <template if="{{messages.length>0}}">
+                <div class="msg">
+                    <div class="title">{{messages[0].title}}</div>
+                    <div class="caption">{{messages[0].caption}}</div>
+                    <div class="buttons">
+                        <template repeat="{{name in messages[0].buttonNames}}">
+                            <input type="button"
+                            value="{{messages[0].buttons[name]}}" data-name="{{name}}"
+                            on-click="{{_btnClick}}"/>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </template>
+    <script>
+        (function() {
+            var FileDialog=function() {
+                var input=this.inputNode=document.createElement('input');
+                input.setAttribute('type','file');
+                this.timeout=90*1000;
+            };
+            FileDialog.prototype={
+                set multiple(value) {
+                    if (value)
+                        this.inputNode.setAttribute('multiple',true);
+                    else
+                        this.inputNode.removeAttribute('multiple');
+                    return value;
+                },
+                get multiple() {
+                    var value=this.inputNode.getAttribute('multiple');
+                    return (value!==null);
+                },
+                set workingDir(dir) {
+                    this.inputNode.setAttribute('nwworkingdir',dir);
+                    return dir;
+                },
+                get workingDir() {
+                    return this.inputNode.getAttribute('nwworkingdir');
+                },
+                _clearTypeAttributes:function() {
+                    this.inputNode.removeAttribute('nwdirectory');
+                    this.inputNode.removeAttribute('nwsaveas');
+                    this.inputNode.removeAttribute('accept');
+                },
+                _getPromise:function() {
+                    var input=this.inputNode;
+                    var self=this;
+                    return new Promise(function(resolve,reject) {
+                        var timeout=setTimeout(reject,self.timeout);
+                        input.onchange=function() {
+                            clearTimeout(timeout);
+                            resolve(input.files);
+                        };
+                    });
+                },
+                showOpenDialog:function(filter) {
+                    var filter=filter.toString();
+
+                    this._clearTypeAttributes();
+
+                    if (filter.length>0);
+                        this.inputNode.setAttribute('accept',filter);
+                    this.inputNode.click();
+
+                    return this._getPromise();
+                },
+                showSaveDialog:function(filename) {
+                    var filename=filename.toString();
+
+                    this._clearTypeAttributes();
+
+                    this.inputNode.setAttribute('nwsaveas',filename);
+                    this.inputNode.click();
+
+                    return this._getPromise();
+                },
+                showDirDialog:function() {
+                    this._clearTypeAttributes();
+                    this.inputNode.setAttribute('nwdirectory',true);
+                    this.inputNode.click();
+                    return this._getPromise();
+                }
+            };
+
+            Polymer({
+                messages:[],
+                ready:function() {
+                    this._fileInput=this.shadowRoot.querySelector('.file');
+                },
+                attributeChanged:function(name,oldV,newV) {
+                    this[name]=newV;
+                },
+                _btnClick:function(e) {
+                    var name=e.target.closest('.buttons input').getAttribute('data-name');
+                    if (name===null) return;
+                    var msg=this.messages.shift();
+                    msg.callBack(name);
+                },
+                //methods
+                showDialogMessage:function(title,caption,buttons) {
+                    var self=this;
+                    var dialog={};
+                    dialog.buttons=buttons||{ok:'OK'};
+                    dialog.buttonNames=Object.keys(dialog.buttons);
+                    dialog.title=title.toString();
+                    dialog.caption=caption.toString();
+                    return new Promise(function(resolve) {
+                        dialog.callBack=resolve;
+                        self.messages.push(dialog);
+                    });
+                },
+                showOpenFileDialog:function(dir,filter,multiple) {
+                    var dir=(dir||'').toString();
+                    var filter=(filter||'').toString();
+                    var multiple=multiple||false;
+                    var dial=new FileDialog;
+                    dial.workingDir=dir;
+                    dial.multiple=multiple;
+                    return dial.showOpenDialog(filter);
+                },
+                showSaveFileDialog:function(dir,filename) {
+                    var dir=(dir||'').toString();
+                    var filename=(filename||'').toString();
+                    var dial=new FileDialog;
+                    dial.workingDir=dir;
+                    return dial.showSaveDialog(filename);
+                },
+                showSelectDirDialog:function() {
+                    var dial=new FileDialog;
+                    return dial.showDirDialog();
+                }
+            });
+        })();
+    </script>
+</polymer-element>

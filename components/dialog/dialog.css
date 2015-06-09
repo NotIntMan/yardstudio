@@ -1,0 +1,52 @@
+.overlayer {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+}
+
+.overlayer.visible {
+    display: block;
+}
+
+.msg {
+    width: 400px;
+    position: absolute;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: 50px;
+    border: 1px solid #40C2E8;
+    color: white;
+    background: #2F3129;
+    padding: 5px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.msg > div {
+    margin: 5px;
+    word-wrap: break-word;
+}
+
+.msg .title {
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+.msg .buttons {
+    margin-top: 10px;
+    float: right;
+}
+
+.msg .buttons input {
+    padding: 3px 10px;
+    font-weight: bold;
+}
+
+.file {
+    display: none;
+}
