@@ -1,4 +1,8 @@
 var fs=require('fs');
+var Path=require('path');
+var child_process=require('child_process');
+var yardsCli=require('yards-cli');
+var PromiseMixin=yardsCli.yards.API.PromiseMixin;
 
 var tabsActiveState=function(app) {
     return app.editor.tabContainer._data.map(function(e){
@@ -81,8 +85,10 @@ module.exports.saveFile=function(app) {
     .then(function() {
         console.log('getting filename');
         if (tab.filename.length===0)
-            //add project path
-            return app.dialog.showSaveFileDialog('','')
+            return app.dialog.showSaveFileDialog(
+                (app.filetree.root||{path:''}).path,
+                app.editor.activeTab.title
+            )
             .then(function(files) {
                 return tab.filename=files[0].path;
             });
@@ -96,8 +102,10 @@ module.exports.saveFile=function(app) {
 module.exports.saveFileAs=function(app) {
     var tab=app.editor.activeTab;
     console.log('getting filename');
-    //add project path
-    app.dialog.showSaveFileDialog('','')
+    app.dialog.showSaveFileDialog(
+        (app.filetree.root||{path:''}).path,
+        app.editor.activeTab.title
+    )
     .then(function(files) {
         return tab.filename=files[0].path;
     })
@@ -112,8 +120,7 @@ module.exports.openFile=function(app) {
     var self=this;
     var filename='';
     var aborted=false;
-    //add project path
-    app.dialog.showOpenFileDialog('','')
+    app.dialog.showOpenFileDialog((app.filetree.root||{path:''}).path,'')
     .then(function(files) {
         if (files.length>0)
             return new Promise(function(resolve,reject) {
@@ -141,4 +148,67 @@ module.exports.undo=function(app) {
 
 module.exports.redo=function(app) {
     app.editor.activeTab.session.getUndoManager().redo();
+};
+
+module.exports.openProject=function(app) {
+    app.dialog.showSelectDirDialog()
+    .then(function(files) {
+        if (files.length>0)
+            app.filetree.directoryPath=files[0].path;
+    });
+};
+
+module.exports.initProject=function(app) {
+    if (app.filetree.root===null) return;
+    if (app.filetree.directoryPath.length===0) return;
+    var opts={
+        "name": app.filetree.root.name,
+        "main": "index.html",
+        "version": "0.0.0",
+        "nwversion": "latest",
+        "runflags":"",
+        "buildflags":"-p "+yardsCli.currentPlatform,
+        "description": "",
+        "keywords": [],
+        "license": "MIT",
+        "author": {
+           "name": (process.env.USERNAME||'')
+        }
+    };
+    var text=require('yards-cli/node_modules/format-json').plain(opts);
+    var path=Path.resolve(app.filetree.root.path,'package.json');
+    var tab=app.editor.newTab(text);
+    tab.setMode('javascript');
+    tab.filename=path;
+};
+
+var execCommand=PromiseMixin.denodeifySpec(
+    child_process.exec.bind(child_process),
+    function(err,stdio,stderr) {
+        if (err)
+            throw stderr;
+        else
+            return stdio;
+    }
+);
+
+var projectOperation=function(app,command) {
+    if (app.filetree.root===null) return;
+    var manifest=require(Path.resolve(app.filetree.root.path,'package.json'));
+    var flags=manifest[command.toString()+'flags'];
+    var cmd='start /wait cmd /k "node "'+
+    Path.resolve(global.module.filename,'../node_modules/yards-cli/yards.js')+
+    '" '+command.toString()+
+    ' '+flags+'"';
+    return execCommand(cmd,{
+        cwd: app.filetree.root.path
+    });
+};
+
+module.exports.runProj=function(app) {
+    return projectOperation(app,'run');
+};
+
+module.exports.buildProj=function(app) {
+    return projectOperation(app,'build');
 };

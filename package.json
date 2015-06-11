@@ -6,53 +6,18 @@
   "author": "Dmitry Demin",
   "license": "MIT",
   "window": {
-    "toolbar": true
+    "toolbar": false
   },
   "dependencies": {
     "js-yaml": "^3.3.1",
-    "yards-cli": "0.1.3"
+    "yards-cli": "0.1.4"
   },
   "nwversion": "0.12.0",
-  "platformOverrides": {
-    "win32": {
-      "window": {
-        "toolbar": false
-      }
-    },
-    "win64": {
-      "window": {
-        "toolbar": false
-      }
-    },
-    "osx": {
-      "window": {
-        "toolbar": false
-      }
-    },
-    "osx32": {
-      "window": {
-        "toolbar": false
-      }
-    },
-    "osx64": {
-      "window": {
-        "toolbar": false
-      }
-    },
-    "linux": {
-      "window": {
-        "toolbar": false
-      }
-    },
-    "linux32": {
-      "window": {
-        "toolbar": false
-      }
-    },
-    "linux64": {
-      "window": {
-        "toolbar": false
-      }
-    }
+  "scripts": {
+    "postinstall": "npm install -g bower && bower install",
+    "start": "node bin/yardstudio.js"
+  },
+  "bin": {
+    "yardstudio": "bin/yardstudio.js"
   }
 }

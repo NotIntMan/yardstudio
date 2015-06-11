@@ -132,6 +132,11 @@
                         this._loaded=true;
                         this.visible=true;
                         this.render();
+                        setTimeout(function() {
+                            try {
+                                App.resize();
+                            } catch(e) {};
+                        },0);
                     }.bind(this));
                 },
                 attributeChanged:function(name,oldV,newV) {

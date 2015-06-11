@@ -93,10 +93,22 @@
                     }.bind(this));
 
                     this.setTheme("monokai");
-                    this.newTab(editor.getSession()).setMode("javascript").title='JavaScript';
-                    this.newTab('').setMode("css").title='CSS';
-                    this.newTab('').setMode("html").title='HTML';
+                    var tab=this.newTab(editor.getSession());
                     editor.$blockScrolling=Infinity;
+                    tab.setMode('javascript');
+                    tab.title='Welcome';
+                    tab.session.setValue(
+`
+Welcome.to(
+    this.cool.editor,
+    'Dear User :)'
+);
+
+We[' glad '].to(
+    see('you') & hope('you').will('enjoy',this)
+);
+`
+                    );
 
                     editor.on('change',function() {
                         this.activeTab.changed=true;

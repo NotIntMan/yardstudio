@@ -36,3 +36,17 @@ tools:
         setHTML:
             title: HTML
             icon: textAlignLeft
+    project:
+        title: Project
+        openProject:
+            title: Select dir
+            icon: folder
+        initProject:
+            title: Init proj.
+            icon: plus
+        runProj:
+            title: Run proj.
+            icon: play
+        buildProj:
+            title: Build proj.
+            icon: terminal

@@ -1,25 +1,30 @@
 <polymer-element name="file-tree">
     <template>
-        <style>@import url(filetree.css);</style>
+        <style>@import url(filetree.css);@import url(../icono/icono.min.css);</style>
         <template id="dir">
-            <div class="dir" on-click="{{obj.toggleVisible}}">
+            <div class="dir">
                 <template repeat="{{file in obj.files}}">
-                    <div class="file">
-                        <div>{{(file.name||file)}}</div>
-                        <template if="{{!!file.files}}">
+                    <div class="file" data-path="{{obj.path}}" on-click="{{_fileClick}}" data-filename="{{(file.name||file)}}">
+                        <div><span
+                        class="{{ ( !!file.files ? 'icono-folder' : 'icono-document' ) }} icon"
+                        ></span>{{(file.name||file)}}</div>
+                        <template if="{{!!file.files&&file._visible}}">
                             <template bind="{{ {obj:file} }}" ref="dir"></template>
                         </template>
                     </div>
                 </template>
             </div>
         </template>
-        <template bind="{{ {obj:root} }}" ref="dir"></template>
+        <div class="container">
+            <template bind="{{ {obj:root} }}" ref="dir"></template>
+        </div>
     </template>
     <script>
         (function() {
             var fs=require('fs');
             var Path=require('path');
             var PromiseMixin=require('yards-cli').yards.API.PromiseMixin;
+            var _readfile=PromiseMixin.denodeify(fs.readFile);
             var _readdir=PromiseMixin.denodeify(fs.readdir);
             var _stat=PromiseMixin.denodeify(fs.stat);
 
@@ -30,7 +35,7 @@
                     return 0;
             };
 
-            var Dir=function(path,files) {
+            var Dir=function(path,files,elem) {
                 this.path=path;
                 this.name=Path.relative(Path.resolve(path,'..'),path);
                 this.files=files.slice().sort(function(a,b) {
@@ -40,20 +45,50 @@
                     if (Dir.isDir(b)) return 1;
                     return compareStrings(a,b);
                 });
-                this.visible=true;
-
-                var self=this;
-                this.toggleVisible=function() {
-                    console.log('azaza');
-                    self.visible=!self.visible;
-                };
+                this.elem=elem;
+                this._visible=this.visible;
             };
             Dir.isDir=function(x) {
                 return (x instanceof Dir);
             };
+            Dir._findDir=function(obj,path) {
+                if (!Dir.isDir(obj))
+                    return null;
+                if (obj.path===path)
+                    return obj;
+                if (path.slice(0,obj.path.length)!==obj.path)
+                    return null;
+                var arr=obj.files
+                .map(function(a) {
+                    var x=Dir._findDir(a,path);
+                    return x;
+                })
+                .filter(function(a) {
+                    return a!==null;
+                });
+                if (arr.length>0)
+                    return arr[0];
+                else
+                    return null;
+            };
+            Dir.prototype.__defineGetter__('visible',function() {
+                return (this.elem.visibleDirs.indexOf(this.path)>=0);
+            });
+            Dir.prototype.__defineSetter__('visible',function(v) {
+                //console.log('set',v);
+                var dirs=this.elem.visibleDirs;
+                var index=dirs.indexOf(this.path);
+                var curValue=(index>=0);
+                if (curValue===v) return v;
+                if (v)
+                    dirs.push(this.path);
+                else
+                    dirs.splice(index,1);
+                return this._visible=v;
+            });
 
             var readDir;
-            readDir=function(path) {
+            readDir=function(path,elem) {
                 return _readdir(path)
                 .then(function(files) {
                     var proms=files.map(function(_filename) {
@@ -63,12 +98,12 @@
                             if (stat.isFile())
                                 return _filename;
                             if (stat.isDirectory())
-                                return readDir(filename);
+                                return readDir(filename,elem);
                         });
                     });
                     return Promise.all(proms)
                     .then(function(files) {
-                        return new Dir(path,files);
+                        return new Dir(path,files,elem);
                     });
                 });
             };
@@ -76,10 +111,20 @@
             Polymer({
                 directoryPath:'',
                 root:null,
+                visibleDirs:[],
+                __watcher:null,
                 directoryPathChanged:function(oldV,newV) {
                     var self=this;
-                    return readDir(newV)
+                    if (this.__watcher!==null) {
+                        this.__watcher.close();
+                        this.__watcher=null;
+                    }
+                    return readDir(newV,this)
                     .then(function(dir) {
+                        self.__watcher=fs.watch(newV,{recursive:true},function(e,f) {
+                            //console.log(f,e);
+                            self.directoryPathChanged(newV,newV);
+                        });
                         return self.root=dir;
                     });
                 },
@@ -89,11 +134,46 @@
                 attributeChanged:function(name,oldV,newV) {
                     this[name]=newV;
                 },
-                bindFunction: function(object) {
-                    console.log(object);
+                _fileClickLastTimeStamp:0,
+                _fileClick:function(e) {
+                    var now=Date.now();
+                    if ((now-250)<this._fileClickLastTimeStamp) return;
+                    this._fileClickLastTimeStamp=now;
+                    var target=e.target.closest('.file');
+                    var _path=target.getAttribute('data-path');
+                    var _filename=target.getAttribute('data-filename');
+                    var path=Path.resolve(_path,_filename);
+                    var dir=Dir._findDir(this.root,path);
+                    //console.log(e.target,path,dir,now);
+                    if (dir!==null)
+                        dir.visible=!dir.visible;
+                    else
+                        this._openFile(path);
                 },
-                _dirClick:function(dir) {
-                    console.log(dir);
+                _openFile:function(path) {
+                    var ext=path.split('.').slice(-1)[0];
+                    var mode='';
+                    if (ext=='js') mode='javascript';
+                    if (ext=='xjs') mode='javascript';
+                    if (ext=='es6') mode='javascript';
+                    if (ext=='json') mode='javascript';
+                    if (ext=='jsonex') mode='javascript';
+                    
+                    if (ext=='css') mode='css';
+                    if (ext=='style') mode='css';
+
+                    if (ext=='html') mode='html';
+                    if (ext=='xml') mode='html';
+                    if (ext=='xhtml') mode='html';
+
+                    console.log(path,ext);
+
+                    return _readfile(path,'utf-8')
+                    .then(function(data) {
+                        var tab=App.editor.newTab(data);
+                        tab.setMode(mode);
+                        tab.filename=path;
+                    });
                 }
             });
         })();

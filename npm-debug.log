@@ -1,0 +1,551 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\iojs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\iojs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '-g' ]
+2 info using npm@2.7.0
+3 info using node@v1.5.1
+4 verbose node symlink C:\Program Files\iojs\\node.exe
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec { raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: 'C:\\Users\\NotIntMan\\Documents\\GitHub\\yardstudio',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory C:\Users\NotIntMan\AppData\Roaming\npm-cache\YARDStudio\0.0.0\package.tgz not in flight; packing
+9 verbose tar pack [ 'C:\\Users\\NotIntMan\\AppData\\Roaming\\npm-cache\\YARDStudio\\0.0.0\\package.tgz',
+9 verbose tar pack   'C:\\Users\\NotIntMan\\Documents\\GitHub\\yardstudio' ]
+10 verbose tarball C:\Users\NotIntMan\AppData\Roaming\npm-cache\YARDStudio\0.0.0\package.tgz
+11 verbose folder C:\Users\NotIntMan\Documents\GitHub\yardstudio
+12 info prepublish YARDStudio@0.0.0
+13 verbose addLocalTarball adding from inside cache C:\Users\NotIntMan\AppData\Roaming\npm-cache\YARDStudio\0.0.0\package.tgz
+14 silly cache afterAdd YARDStudio@0.0.0
+15 verbose afterAdd C:\Users\NotIntMan\AppData\Roaming\npm-cache\YARDStudio\0.0.0\package\package.json not in flight; writing
+16 verbose afterAdd C:\Users\NotIntMan\AppData\Roaming\npm-cache\YARDStudio\0.0.0\package\package.json written
+17 silly install resolved [ { name: 'YARDStudio',
+17 silly install resolved     version: '0.0.0',
+17 silly install resolved     description: 'Yet Another Rapid Development Studio',
+17 silly install resolved     main: 'index.html',
+17 silly install resolved     author: { name: 'Dmitry Demin' },
+17 silly install resolved     license: 'MIT',
+17 silly install resolved     window: { toolbar: false },
+17 silly install resolved     dependencies: { 'js-yaml': '^3.3.1', 'yards-cli': '0.1.4' },
+17 silly install resolved     nwversion: '0.12.0',
+17 silly install resolved     scripts: { postinstall: 'bin/install.js', start: 'bin/yardstudio.js' },
+17 silly install resolved     bin: { yardstudio: 'bin/yardstudio.js' },
+17 silly install resolved     gitHead: '2e7d027aa34a9288c617825363c680bb0ec3c837',
+17 silly install resolved     readme: 'ERROR: No README data found!',
+17 silly install resolved     _id: 'YARDStudio@0.0.0',
+17 silly install resolved     _shasum: '098bff3eb32fcbf71a00db919575df6012ab2d28',
+17 silly install resolved     _from: '..\\..\\..\\Documents\\GitHub\\yardstudio',
+17 silly install resolved     _resolved: 'file:..\\..\\..\\Documents\\GitHub\\yardstudio' } ]
+18 info install YARDStudio@0.0.0 into C:\Users\NotIntMan\AppData\Roaming\npm
+19 info installOne YARDStudio@0.0.0
+20 verbose installOne of YARDStudio to C:\Users\NotIntMan\AppData\Roaming\npm not in flight; installing
+21 verbose lock using C:\Users\NotIntMan\AppData\Roaming\npm-cache\_locks\YARDStudio-152d0879e1b4c1df.lock for C:\Users\NotIntMan\AppData\Roaming\npm\node_modules\YARDStudio
+22 silly install write writing YARDStudio 0.0.0 to C:\Users\NotIntMan\AppData\Roaming\npm\node_modules\YARDStudio
+23 silly cache addNamed cb YARDStudio@0.0.0
+24 verbose unbuild node_modules\YARDStudio
+25 verbose gentlyRm vacuuming C:\Users\NotIntMan\AppData\Roaming\npm\node_modules\YARDStudio
+26 verbose tar unpack C:\Users\NotIntMan\AppData\Roaming\npm-cache\YARDStudio\0.0.0\package.tgz
+27 verbose tar unpacking to C:\Users\NotIntMan\AppData\Roaming\npm\node_modules\YARDStudio
+28 verbose gentlyRm vacuuming C:\Users\NotIntMan\AppData\Roaming\npm\node_modules\YARDStudio
+29 silly gunzTarPerm modes [ '777', '666' ]
+30 silly gunzTarPerm extractEntry package.json
+31 silly gunzTarPerm extractEntry .npmignore
+32 silly gunzTarPerm extractEntry index.js
+33 silly gunzTarPerm extractEntry index.html
+34 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ace.js
+35 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-makefile.js
+36 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-markdown.js
+37 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-mask.js
+38 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-matlab.js
+39 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-lucene.js
+40 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-mushcode.js
+41 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-mysql.js
+42 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-nix.js
+43 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-objectivec.js
+44 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-ocaml.js
+45 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-luapage.js
+46 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-pascal.js
+47 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-lua.js
+48 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-perl.js
+49 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-lsl.js
+50 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-pgsql.js
+51 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-logiql.js
+52 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-php.js
+53 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-livescript.js
+54 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-plain_text.js
+55 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-lisp.js
+56 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-powershell.js
+57 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-liquid.js
+58 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-praat.js
+59 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-less.js
+60 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-prolog.js
+61 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-latex.js
+62 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-properties.js
+63 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-julia.js
+64 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-protobuf.js
+65 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-jsx.js
+66 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-python.js
+67 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-jsp.js
+68 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-r.js
+69 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-jsoniq.js
+70 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-rdoc.js
+71 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-json.js
+72 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-rhtml.js
+73 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-javascript.js
+74 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-ruby.js
+75 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-java.js
+76 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-rust.js
+77 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-jade.js
+78 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-sass.js
+79 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-jack.js
+80 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-scad.js
+81 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-io.js
+82 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-scala.js
+83 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-ini.js
+84 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-scheme.js
+85 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-html_ruby.js
+86 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-scss.js
+87 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-html.js
+88 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-sh.js
+89 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-haxe.js
+90 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-sjs.js
+91 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-haskell.js
+92 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-smarty.js
+93 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-handlebars.js
+94 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-snippets.js
+95 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-haml.js
+96 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-soy_template.js
+97 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-groovy.js
+98 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-space.js
+99 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-golang.js
+100 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-sql.js
+101 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-glsl.js
+102 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-stylus.js
+103 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-gitignore.js
+104 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-svg.js
+105 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-gherkin.js
+106 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-tcl.js
+107 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-gcode.js
+108 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-tex.js
+109 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-ftl.js
+110 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-text.js
+111 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-forth.js
+112 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-textile.js
+113 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-erlang.js
+114 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-toml.js
+115 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-elm.js
+116 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-twig.js
+117 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-elixir.js
+118 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-typescript.js
+119 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-ejs.js
+120 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-vala.js
+121 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-eiffel.js
+122 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-vbscript.js
+123 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-dot.js
+124 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-velocity.js
+125 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-dockerfile.js
+126 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-verilog.js
+127 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-django.js
+128 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-vhdl.js
+129 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-diff.js
+130 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-xml.js
+131 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-dart.js
+132 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-xquery.js
+133 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-d.js
+134 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-yaml.js
+135 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-curly.js
+136 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/worker-php.js
+137 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-css.js
+138 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-ambiance.js
+139 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-csharp.js
+140 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-chaos.js
+141 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-coldfusion.js
+142 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-chrome.js
+143 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-coffee.js
+144 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-clouds.js
+145 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-cobol.js
+146 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-clouds_midnight.js
+147 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-clojure.js
+148 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-cobalt.js
+149 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-cirru.js
+150 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-crimson_editor.js
+151 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-c_cpp.js
+152 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-dawn.js
+153 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-c9search.js
+154 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-dreamweaver.js
+155 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-batchfile.js
+156 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-eclipse.js
+157 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-autohotkey.js
+158 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-github.js
+159 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-assembly_x86.js
+160 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-idle_fingers.js
+161 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-asciidoc.js
+162 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-katzenmilch.js
+163 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-applescript.js
+164 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-kr_theme.js
+165 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-apache_conf.js
+166 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-kuroir.js
+167 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-ada.js
+168 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-merbivore.js
+169 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-actionscript.js
+170 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-merbivore_soft.js
+171 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-abap.js
+172 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-mono_industrial.js
+173 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/keybinding-vim.js
+174 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-monokai.js
+175 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/keybinding-emacs.js
+176 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-pastel_on_dark.js
+177 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-whitespace.js
+178 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-solarized_dark.js
+179 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-themelist.js
+180 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-solarized_light.js
+181 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-textarea.js
+182 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-terminal.js
+183 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-statusbar.js
+184 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-textmate.js
+185 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-static_highlight.js
+186 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-tomorrow.js
+187 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-split.js
+188 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-tomorrow_night.js
+189 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-spellcheck.js
+190 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-tomorrow_night_blue.js
+191 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-settings_menu.js
+192 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-tomorrow_night_bright.js
+193 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-searchbox.js
+194 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-tomorrow_night_eighties.js
+195 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-old_ie.js
+196 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-twilight.js
+197 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-modelist.js
+198 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-vibrant_ink.js
+199 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-linking.js
+200 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/theme-xcode.js
+201 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-language_tools.js
+202 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/worker-coffee.js
+203 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-keybinding_menu.js
+204 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/worker-css.js
+205 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-error_marker.js
+206 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/worker-html.js
+207 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-emmet.js
+208 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/worker-javascript.js
+209 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-elastic_tabstops_lite.js
+210 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/worker-json.js
+211 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-chromevox.js
+212 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/worker-lua.js
+213 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/ext-beautify.js
+214 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/worker-xquery.js
+215 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/mode-mel.js
+216 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/abap.js
+217 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/less.js
+218 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/liquid.js
+219 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/lisp.js
+220 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/livescript.js
+221 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/latex.js
+222 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/lsl.js
+223 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/lua.js
+224 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/luapage.js
+225 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/lucene.js
+226 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/makefile.js
+227 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/julia.js
+228 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/markdown.js
+229 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/jsx.js
+230 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/mask.js
+231 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/jsp.js
+232 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/matlab.js
+233 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/jsoniq.js
+234 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/mel.js
+235 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/json.js
+236 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/mushcode.js
+237 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/javascript.js
+238 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/mysql.js
+239 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/java.js
+240 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/nix.js
+241 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/jade.js
+242 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/objectivec.js
+243 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/jack.js
+244 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/ocaml.js
+245 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/io.js
+246 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/pascal.js
+247 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/ini.js
+248 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/perl.js
+249 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/html_ruby.js
+250 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/pgsql.js
+251 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/html.js
+252 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/php.js
+253 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/haxe.js
+254 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/plain_text.js
+255 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/haskell.js
+256 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/powershell.js
+257 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/handlebars.js
+258 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/praat.js
+259 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/haml.js
+260 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/prolog.js
+261 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/groovy.js
+262 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/properties.js
+263 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/golang.js
+264 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/protobuf.js
+265 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/glsl.js
+266 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/python.js
+267 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/gitignore.js
+268 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/r.js
+269 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/gherkin.js
+270 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/rdoc.js
+271 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/gcode.js
+272 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/rhtml.js
+273 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/ftl.js
+274 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/ruby.js
+275 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/forth.js
+276 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/rust.js
+277 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/erlang.js
+278 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/sass.js
+279 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/elm.js
+280 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/scad.js
+281 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/elixir.js
+282 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/scala.js
+283 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/ejs.js
+284 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/scheme.js
+285 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/eiffel.js
+286 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/scss.js
+287 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/dot.js
+288 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/sh.js
+289 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/dockerfile.js
+290 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/sjs.js
+291 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/django.js
+292 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/smarty.js
+293 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/diff.js
+294 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/snippets.js
+295 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/dart.js
+296 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/soy_template.js
+297 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/d.js
+298 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/space.js
+299 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/curly.js
+300 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/sql.js
+301 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/css.js
+302 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/stylus.js
+303 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/csharp.js
+304 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/svg.js
+305 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/coldfusion.js
+306 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/tcl.js
+307 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/coffee.js
+308 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/tex.js
+309 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/cobol.js
+310 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/text.js
+311 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/clojure.js
+312 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/textile.js
+313 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/cirru.js
+314 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/toml.js
+315 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/c_cpp.js
+316 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/twig.js
+317 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/c9search.js
+318 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/typescript.js
+319 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/batchfile.js
+320 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/vala.js
+321 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/autohotkey.js
+322 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/vbscript.js
+323 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/assembly_x86.js
+324 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/velocity.js
+325 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/asciidoc.js
+326 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/verilog.js
+327 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/applescript.js
+328 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/vhdl.js
+329 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/apache_conf.js
+330 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/xml.js
+331 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/ada.js
+332 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/xquery.js
+333 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/actionscript.js
+334 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/yaml.js
+335 silly gunzTarPerm extractEntry components/ace-editor/ace-editor/snippets/logiql.js
+336 silly gunzTarPerm extractEntry components/ace-editor/ace-editor.css
+337 silly gunzTarPerm extractEntry components/ace-editor/ace-editor.html
+338 silly gunzTarPerm extractEntry components/dialog/dialog.css
+339 silly gunzTarPerm extractEntry components/dialog/dialog.html
+340 silly gunzTarPerm extractEntry components/draggable/draggable.css
+341 silly gunzTarPerm extractEntry components/draggable/draggable.html
+342 silly gunzTarPerm extractEntry components/filetree/filetree.css
+343 silly gunzTarPerm extractEntry components/filetree/filetree.html
+344 silly gunzTarPerm extractEntry components/form/form.html
+345 silly gunzTarPerm extractEntry components/icono/icono.min.css
+346 silly gunzTarPerm extractEntry components/popup/popup.css
+347 silly gunzTarPerm extractEntry components/popup/popup.html
+348 silly gunzTarPerm extractEntry components/toolbar/toolbar.css
+349 silly gunzTarPerm extractEntry components/toolbar/toolbar.html
+350 silly gunzTarPerm extractEntry index.css
+351 silly gunzTarPerm extractEntry .gitattributes
+352 silly gunzTarPerm extractEntry bin/install.js
+353 silly gunzTarPerm extractEntry bin/yardstudio.js
+354 silly gunzTarPerm extractEntry lib/application.js
+355 silly gunzTarPerm extractEntry lib/config-manager.js
+356 silly gunzTarPerm extractEntry lib/keymaster.js
+357 silly gunzTarPerm extractEntry lib/config-manager.html
+358 silly gunzTarPerm extractEntry lib/keymaster.html
+359 silly gunzTarPerm extractEntry test.html
+360 silly gunzTarPerm extractEntry bower.json
+361 silly gunzTarPerm extractEntry toolbars/main.js
+362 silly gunzTarPerm extractEntry toolbars/main.yml
+363 info preinstall YARDStudio@0.0.0
+364 silly prepareForInstallMany adding js-yaml@^3.3.1 from YARDStudio dependencies
+365 silly prepareForInstallMany adding yards-cli@0.1.4 from YARDStudio dependencies
+366 silly cache add args [ 'js-yaml@^3.3.1', null ]
+367 verbose cache add spec js-yaml@^3.3.1
+368 silly cache add args [ 'yards-cli@0.1.4', null ]
+369 verbose cache add spec yards-cli@0.1.4
+370 silly cache add parsed spec { raw: 'js-yaml@^3.3.1',
+370 silly cache add   scope: null,
+370 silly cache add   name: 'js-yaml',
+370 silly cache add   rawSpec: '^3.3.1',
+370 silly cache add   spec: '>=3.3.1 <4.0.0',
+370 silly cache add   type: 'range' }
+371 verbose addNamed js-yaml@>=3.3.1 <4.0.0
+372 silly addNamed semver.valid null
+373 silly addNamed semver.validRange >=3.3.1 <4.0.0
+374 silly addNameRange { name: 'js-yaml', range: '>=3.3.1 <4.0.0', hasData: false }
+375 silly mapToRegistry name js-yaml
+376 silly mapToRegistry using default registry
+377 silly mapToRegistry registry https://registry.npmjs.org/
+378 silly mapToRegistry uri https://registry.npmjs.org/js-yaml
+379 verbose addNameRange registry:https://registry.npmjs.org/js-yaml not in flight; fetching
+380 silly cache add parsed spec { raw: 'yards-cli@0.1.4',
+380 silly cache add   scope: null,
+380 silly cache add   name: 'yards-cli',
+380 silly cache add   rawSpec: '0.1.4',
+380 silly cache add   spec: '0.1.4',
+380 silly cache add   type: 'version' }
+381 verbose addNamed yards-cli@0.1.4
+382 silly addNamed semver.valid 0.1.4
+383 silly addNamed semver.validRange 0.1.4
+384 silly mapToRegistry name yards-cli
+385 silly mapToRegistry using default registry
+386 silly mapToRegistry registry https://registry.npmjs.org/
+387 silly mapToRegistry uri https://registry.npmjs.org/yards-cli
+388 verbose addNameVersion registry:https://registry.npmjs.org/yards-cli not in flight; fetching
+389 verbose request uri https://registry.npmjs.org/yards-cli
+390 verbose request no auth needed
+391 info attempt registry request try #1 at 01:40:35
+392 verbose request id 0458b5ddcce2e864
+393 verbose etag "630MY5BA4KWL1ISAI80HV86P2"
+394 http request GET https://registry.npmjs.org/yards-cli
+395 verbose request uri https://registry.npmjs.org/js-yaml
+396 verbose request no auth needed
+397 info attempt registry request try #1 at 01:40:35
+398 verbose etag "899YZGMAM37YSMI1VIY9LYF26"
+399 http request GET https://registry.npmjs.org/js-yaml
+400 http 304 https://registry.npmjs.org/js-yaml
+401 silly get cb [ 304,
+401 silly get   { date: 'Thu, 11 Jun 2015 18:40:44 GMT',
+401 silly get     via: '1.1 varnish',
+401 silly get     'cache-control': 'max-age=60',
+401 silly get     etag: '"899YZGMAM37YSMI1VIY9LYF26"',
+401 silly get     age: '44',
+401 silly get     connection: 'keep-alive',
+401 silly get     'x-served-by': 'cache-fra1226-FRA',
+401 silly get     'x-cache': 'HIT',
+401 silly get     'x-cache-hits': '450',
+401 silly get     'x-timer': 'S1434048044.315084,VS0,VE0',
+401 silly get     vary: 'Accept' } ]
+402 verbose etag https://registry.npmjs.org/js-yaml from cache
+403 verbose get saving js-yaml to C:\Users\NotIntMan\AppData\Roaming\npm-cache\registry.npmjs.org\js-yaml\.cache.json
+404 silly addNameRange number 2 { name: 'js-yaml', range: '>=3.3.1 <4.0.0', hasData: true }
+405 silly addNameRange versions [ 'js-yaml',
+405 silly addNameRange   [ '0.2.0',
+405 silly addNameRange     '0.2.1',
+405 silly addNameRange     '0.2.2',
+405 silly addNameRange     '0.3.0',
+405 silly addNameRange     '0.3.1',
+405 silly addNameRange     '0.3.2',
+405 silly addNameRange     '0.3.3',
+405 silly addNameRange     '0.3.4',
+405 silly addNameRange     '0.3.5',
+405 silly addNameRange     '0.3.6',
+405 silly addNameRange     '0.3.7',
+405 silly addNameRange     '1.0.0',
+405 silly addNameRange     '1.0.1',
+405 silly addNameRange     '1.0.2',
+405 silly addNameRange     '1.0.3',
+405 silly addNameRange     '2.0.0',
+405 silly addNameRange     '2.0.1',
+405 silly addNameRange     '2.0.2',
+405 silly addNameRange     '2.0.3',
+405 silly addNameRange     '2.0.4',
+405 silly addNameRange     '2.0.5',
+405 silly addNameRange     '2.1.0',
+405 silly addNameRange     '2.1.1',
+405 silly addNameRange     '2.1.2',
+405 silly addNameRange     '2.1.3',
+405 silly addNameRange     '3.0.0',
+405 silly addNameRange     '3.0.1',
+405 silly addNameRange     '3.0.2',
+405 silly addNameRange     '3.1.0',
+405 silly addNameRange     '3.2.1',
+405 silly addNameRange     '3.2.2',
+405 silly addNameRange     '3.2.3',
+405 silly addNameRange     '3.2.4',
+405 silly addNameRange     '3.2.5',
+405 silly addNameRange     '3.2.6',
+405 silly addNameRange     '3.2.7',
+405 silly addNameRange     '3.3.0',
+405 silly addNameRange     '3.3.1' ] ]
+406 verbose addNamed js-yaml@3.3.1
+407 silly addNamed semver.valid 3.3.1
+408 silly addNamed semver.validRange 3.3.1
+409 silly cache afterAdd js-yaml@3.3.1
+410 verbose afterAdd C:\Users\NotIntMan\AppData\Roaming\npm-cache\js-yaml\3.3.1\package\package.json not in flight; writing
+411 verbose afterAdd C:\Users\NotIntMan\AppData\Roaming\npm-cache\js-yaml\3.3.1\package\package.json written
+412 http 304 https://registry.npmjs.org/yards-cli
+413 silly get cb [ 304,
+413 silly get   { date: 'Thu, 11 Jun 2015 18:40:44 GMT',
+413 silly get     via: '1.1 varnish',
+413 silly get     'cache-control': 'max-age=60',
+413 silly get     etag: '"630MY5BA4KWL1ISAI80HV86P2"',
+413 silly get     age: '0',
+413 silly get     connection: 'keep-alive',
+413 silly get     'x-served-by': 'cache-fra1236-FRA',
+413 silly get     'x-cache': 'MISS',
+413 silly get     'x-cache-hits': '0',
+413 silly get     'x-timer': 'S1434048044.302032,VS0,VE108',
+413 silly get     vary: 'Accept' } ]
+414 verbose etag https://registry.npmjs.org/yards-cli from cache
+415 verbose get saving yards-cli to C:\Users\NotIntMan\AppData\Roaming\npm-cache\registry.npmjs.org\yards-cli\.cache.json
+416 verbose about to build C:\Users\NotIntMan\AppData\Roaming\npm\node_modules\YARDStudio
+417 verbose unlock done using C:\Users\NotIntMan\AppData\Roaming\npm-cache\_locks\YARDStudio-152d0879e1b4c1df.lock for C:\Users\NotIntMan\AppData\Roaming\npm\node_modules\YARDStudio
+418 verbose stack Error: version not found: yards-cli@0.1.4
+418 verbose stack     at setData (C:\Program Files\iojs\node_modules\npm\lib\cache\add-named.js:129:12)
+418 verbose stack     at RES (C:\Program Files\iojs\node_modules\npm\node_modules\inflight\inflight.js:23:14)
+418 verbose stack     at f (C:\Program Files\iojs\node_modules\npm\node_modules\once\once.js:17:25)
+418 verbose stack     at saved (C:\Program Files\iojs\node_modules\npm\lib\cache\caching-client.js:173:7)
+418 verbose stack     at FSReqWrap.oncomplete (fs.js:77:15)
+419 verbose statusCode 404
+420 verbose cwd C:\Users\NotIntMan\Documents\GitHub\yardstudio
+421 error Windows_NT 6.1.7601
+422 error argv "C:\\Program Files\\iojs\\\\node.exe" "C:\\Program Files\\iojs\\node_modules\\npm\\bin\\npm-cli.js" "install" "-g"
+423 error node v1.5.1
+424 error npm  v2.7.0
+425 error version not found: yards-cli@0.1.4
+426 error If you need help, you may report this error at:
+426 error     <http://github.com/npm/npm/issues>
+427 verbose exit [ 1, true ]
+428 verbose unbuild node_modules\YARDStudio
+429 info preuninstall YARDStudio@0.0.0
+430 info uninstall YARDStudio@0.0.0
+431 verbose unbuild rmStuff YARDStudio@0.0.0 from C:\Users\NotIntMan\AppData\Roaming\npm\node_modules
+432 verbose gentlyRm verifying that C:\Users\NotIntMan\AppData\Roaming\npm is managed by npm
+433 silly isManaged C:\Users\NotIntMan\AppData\Roaming\npm is not inside C:\Users\NotIntMan\AppData\Roaming\npm\node_modules
+434 silly isManaged C:\Users\NotIntMan\AppData\Roaming\npm is not inside C:\Users\NotIntMan\AppData\Roaming\npm\node_modules
+435 silly isManaged C:\Users\NotIntMan\AppData\Roaming\npm is inside C:\Users\NotIntMan\AppData\Roaming\npm
+436 silly gentlyRm C:\Users\NotIntMan\AppData\Roaming\npm is managed by npm
+437 silly gentlyRm C:\Users\NotIntMan\AppData\Roaming\npm\yardstudio.cmd is under C:\Users\NotIntMan\AppData\Roaming\npm
+438 verbose gentlyRm vacuuming C:\Users\NotIntMan\AppData\Roaming\npm\yardstudio.cmd up to C:\Users\NotIntMan\AppData\Roaming\npm
+439 verbose gentlyRm verifying that C:\Users\NotIntMan\AppData\Roaming\npm is managed by npm
+440 silly isManaged C:\Users\NotIntMan\AppData\Roaming\npm is not inside C:\Users\NotIntMan\AppData\Roaming\npm\node_modules
+441 silly isManaged C:\Users\NotIntMan\AppData\Roaming\npm is not inside C:\Users\NotIntMan\AppData\Roaming\npm\node_modules
+442 silly isManaged C:\Users\NotIntMan\AppData\Roaming\npm is inside C:\Users\NotIntMan\AppData\Roaming\npm
+443 silly gentlyRm C:\Users\NotIntMan\AppData\Roaming\npm is managed by npm
+444 silly gentlyRm C:\Users\NotIntMan\AppData\Roaming\npm\yardstudio is under C:\Users\NotIntMan\AppData\Roaming\npm
+445 verbose gentlyRm vacuuming C:\Users\NotIntMan\AppData\Roaming\npm\yardstudio up to C:\Users\NotIntMan\AppData\Roaming\npm
+446 info postuninstall YARDStudio@0.0.0
+447 verbose gentlyRm vacuuming C:\Users\NotIntMan\AppData\Roaming\npm\node_modules\YARDStudio
+448 silly gentlyRm purging C:\Users\NotIntMan\AppData\Roaming\npm\node_modules\YARDStudio
+449 silly gentlyRm quitting because other entries in C:\Users\NotIntMan\AppData\Roaming\npm\node_modules

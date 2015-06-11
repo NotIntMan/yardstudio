@@ -17,3 +17,24 @@ body {
 .ace_editor {
     height: calc(100% - 31px);
 }
+
+.left-col {
+    position: absolute;
+    left: 0;
+    width: 200px;
+    top: 0;
+    bottom: 0;
+}
+
+.filetree {
+    width: 100%;
+    height: 100%;
+}
+
+.center-col {
+    position: absolute;
+    left: 200px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}

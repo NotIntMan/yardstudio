@@ -1,7 +1,30 @@
+.container {
+    overflow: scroll;
+    width: 100%;
+    height: 100%;
+    background: #272822;
+    white-space: nowrap;
+}
+
 .file {
     margin: 5px;
+    transition: 1s;
+    white-space: nowrap;
+}
+
+.file:hover {
+    color: #40C2E8;
 }
 
 .dir {
+    color: white;
     padding-left: 10px;
+    font-size: 10pt;
+    -webkit-user-select: none;
+    cursor: default;
+}
+
+.icon {
+    zoom: 0.5;
+    color: white;
 }
